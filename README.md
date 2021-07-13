@@ -1,8 +1,8 @@
-# 声明
+# Notice
 
-此项目只保留了 Java 相关的文件，其他文件均被删除。
+This repository is a copy of [this project](https://github.com/rabbitmq/rabbitmq-tutorials).
 
-对文件对所有修改仅出于练习目的。
+Changes: Preserve only Java files and make modifications to them for exercises purpose.
 
 # License
 
