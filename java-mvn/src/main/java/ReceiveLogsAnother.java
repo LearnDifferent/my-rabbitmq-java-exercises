@@ -3,10 +3,9 @@ import com.rabbitmq.client.*;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Fanout Exchange 情况下，接收订阅消息的消费者
- * 发布消息的是 EmitLog
+ * 完全拷贝自 ReceiveLogs，为了测试多个订阅者的情况
  */
-public class ReceiveLogs {
+public class ReceiveLogsAnother {
 
     // 交换机名称
     private static final String EXCHANGE_NAME = "logs";
@@ -24,12 +23,11 @@ public class ReceiveLogs {
         // 交换机的名称和类型
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
 
-        // 这个 channel 声明了 exchange，而 exchange 会自动创建临时的队列给订阅者
-        // 所以，订阅者可以这样获取属于自己的临时队列：
-        String queue = channel.queueDeclare().getQueue();
+        // 通过 Channel 的队列声明来获取队列名称
+        String queueName = channel.queueDeclare().getQueue();
 
-        // 绑定队列：队列，交换机名称，routing key
-        channel.queueBind(queue, EXCHANGE_NAME, "");
+        // 绑定队列：队列名称，交换机名称，routing key
+        channel.queueBind(queueName, EXCHANGE_NAME, "");
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -38,9 +36,8 @@ public class ReceiveLogs {
             System.out.println(" [x] Received '" + message + "'");
         };
 
-        // 这里第一个参数要传入队列
-        channel.basicConsume(queue, true, deliverCallback, consumerTag -> {
+        // 这里第一个参数要传入队列名称
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
         });
     }
 }
-
