@@ -31,7 +31,7 @@ public class Send {
             /*
             queueDeclare 的参数：
             1. queue name 队列名称
-            2. durable 是否持久化
+            2. durable 是否持久化（如果持久化，那么重启服务器后，依旧会被保存）
             3. exclusive 是否排他（独占）
             4. auto delete 是否自动删除
             5. construction arguments 还可以添加其他参数

@@ -138,10 +138,6 @@ Fanout：展开、散开、广播的含义
 
 >   参考代码：EmitLogTopic 和 ReceiveLogsTopic
 
-## RPC：Remote Procedure Call 远程过程调用
-
-待补充。
-
 # Publisher Confirms 确认模式
 
 ## 学习确认模式之前：了解 RabbitMQ 的事务
@@ -163,7 +159,9 @@ Fanout：展开、散开、广播的含义
 
 一般使用异步确认。
 
-待补充。。。
+# 待补充：
+- [ ] RPC：Remote Procedure Call 远程过程调用
+- [ ] 异步的确认模式
 
 参考资料：
 
