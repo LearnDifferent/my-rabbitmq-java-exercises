@@ -159,6 +159,13 @@ Fanout：展开、散开、广播的含义
 
 一般使用异步确认。
 
+# GitHub
+
+相关链接：
+
+- [RabbitMQ.md](https://github.com/LearnDifferent/my-notes/blob/master/RabbitMQ%E7%AC%94%E8%AE%B0.md)
+- [spring-amqp-sample](https://github.com/LearnDifferent/spring-amqp-sample)
+
 # 待补充：
 - [ ] RPC：Remote Procedure Call 远程过程调用
 - [ ] 异步的确认模式
