@@ -1,4 +1,4 @@
-package confirm.sync;
+package confirm.async;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -22,7 +22,7 @@ public class Sub {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.queueDeclare(ConfirmConst.SYNC_QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare(ConfirmConst.ASYNC_QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages.");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
@@ -30,8 +30,7 @@ public class Sub {
             System.out.println(" [x] Received '" + message + "'");
         };
 
-
-        channel.basicConsume(ConfirmConst.SYNC_QUEUE_NAME, true, deliverCallback, consumerTag -> {
+        channel.basicConsume(ConfirmConst.ASYNC_QUEUE_NAME, true, deliverCallback, consumerTag -> {
         });
     }
 }

@@ -1,6 +1,6 @@
 [toc]
 
->   RabbitMQ 和 Java 相关笔记，代码在 [java-mvn](./java-mvn) 内。
+>   相关代码在 [java-mvn](./java-mvn) 和 [java](./java) 内。
 
 # Work Queues 的模式
 
@@ -155,20 +155,29 @@ Fanout：展开、散开、广播的含义
 1.  同步确认：等待服务器端发送确认成功的指令
     1.  普通确认：只能一次确认一条。返回值是 boolean，可以精确操作。
     2.  批量确认：能确认多条。只要其中一条没有确认成功，就会抛出异常。
-2.  异步确认
+2.  异步确认（推荐使用）
 
-一般使用异步确认。
+***
 
-# GitHub
+**异步确认**
+
+基本原理：
+
+- 生产者每次发送消息到队列中，这条消息都要生成匹配一个序列号 `sequenceNumber`（也就是 `deliveryTag`）
+- 生成的 `sequenceNumber` 要存放进 `unconfirmed` 集合中
+	- `unconfirmed` 集合需要使用 SortedSet 有序集合结构
+	- 每个 Channel 需要维护一个 `unconfirmed` 
+- Channel 对象会添加一个 `ConfirmListener` ，用于监听消息是否被收到
+- 只要 `ConfirmListener` 发现消息被接收了，就从 `unconfirmed` 集合中，删除该消息的 `sequenceNumber`
+
+> 相关代码在 confirm 包，包括 sync 包和 async 包
+
+# 相关链接
 
 相关链接：
 
 - [RabbitMQ.md](https://github.com/LearnDifferent/my-notes/blob/master/RabbitMQ%E7%AC%94%E8%AE%B0.md)
 - [spring-amqp-sample](https://github.com/LearnDifferent/spring-amqp-sample)
-
-# 待补充：
-- [ ] RPC：Remote Procedure Call 远程过程调用
-- [ ] 异步的确认模式
 
 参考资料：
 

@@ -4,7 +4,7 @@ Forked from [rabbitmq/rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-t
 
 Changes: Preserve only Java files and make modifications to them for exercises purpose.
 
-# My Notes 
+# My Notes
 
 Checkout [rabbitmq-java-note.md](./rabbitmq-java-note.md)
 
